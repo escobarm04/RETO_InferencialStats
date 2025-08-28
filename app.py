@@ -13,7 +13,6 @@ import scipy as sp
 import pingouin as pg
 import openpyxl
 from scipy.stats import shapiro, probplot
-from Reto import *
 
 st.set_page_config(page_title='Reto | Costo Póliza de Seguro',
                    page_icon = '🪲', 
@@ -76,7 +75,8 @@ def main():
         st.dataframe(Clasificador)
     
     elif navegador == 'Ejercicio No. 1':
-        pass
+        st.header('Ejercicio No. 1: El monto promedio que una persona paga por su póliza de seguros es menor de 9,480 dólares')
+        
     elif navegador == 'Ejercicio No. 2':
         pass
     elif navegador == 'Ejercicio No. 3':
