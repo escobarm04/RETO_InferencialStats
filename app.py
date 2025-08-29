@@ -129,8 +129,7 @@ def main():
                     - Valor p: 1.0
                     - Tamaño del efecto actualizado: 0.292
                     - Potencia de la prueba actualizada: 1.5721415800669329e-30 (Practicamente 0)
-                    """)
-   
+                    """)  
     elif navegador == 'Ejercicio No. 2':
         st.subheader('📊 Ejercicio No. 2:')
         st.markdown(r"""
@@ -179,7 +178,7 @@ def main():
                     #### **4) Gráficamos la distribución del estadistico t y valor crítico:**
                     """)
         st.pyplot(show_fig4())
-        st.markdown(">**Es evidente que el estadistico de t se encuentra hasta el otro extremos de la zona de rechazo, no se rechaza la hipótesis nula**")
+        st.markdown(">**Es evidente que el estadistico de t se encuentra dentro de la zona de rechazo, se rechaza la hipótesis nula y se acepta la alternativa**")
         st.markdown(r"""
                     #### **5) Obtenemos el valor de p a partir del esatdistico de t-student:**
                     - **Estadística t:** -1.77561
@@ -343,11 +342,49 @@ def main():
                     #### **5) Gráficamos la distribución del estadistico T y valor crítico:**
                     """)
         st.pyplot(show_fig9())
-        st.markdown(">**El estadistico de F cae en la zona de rechazo, se rechaza la hipótesis nula y se acepta la hipotesis alternativa: Hay diferencias entre los dos grupos de fumadores y no fumadores**")
+        st.markdown(">**El estadistico de t cae en la zona de rechazo (derecha, 30.29), se rechaza la hipótesis nula y se acepta la hipotesis alternativa: Hay diferencias entre los dos grupos de fumadores y no fumadores**")
         st.markdown(r"""
                     #### **6) Obtenemos el valor de p a partir del esatdistico de F de ANOVA de un factor:** """)
         st.table(resultadost)
     else:
-        pass
+        st.header('✍🏻 REPORTE EJECUTIVO')
+        st.subheader("📝 DATASET:")
+        st.markdown("""
+                    Es importante destacar que la naturaleza del dataset no permite el desarrollo de pruebas de estadística inferencial paramétrica, sino no paramétricas, dado que los datos no muestran una distribución normal en ninguna de las variables analizadas. Seleccionamos la prueba de normalidad de Shapiro-Wilk, ya que contrasta específicamente si los datos siguen una distribución normal a partir de una combinación de ordenamientos y varianzas. Por otra parte, pruebas como Kolmogorov-Smirnov son menos específicas, pues constituyen una prueba general de bondad de ajuste, no limitada únicamente a la normalidad, y pueden aplicarse a cualquier distribución de referencia.
+                    Dicho esto, se aplicó la prueba de Shapiro-Wilk y, adicionalmente, se utilizaron herramientas gráficas (Q-Q plot e histogramas), lo que reforzó la evidencia de que los datos no cumplen con el supuesto de normalidad.
+                    """)
+        st.subheader("1️⃣ Ejercicio No. 1")
+        st.markdown(r"""
+                Conocemos la media de la población y suponemos una distribución normal. Sin embargo, no conocemos la desviación estándar (σ). Dado que es desconocida, utilizamos el estadístico t de Student unilateral (cola izquierda).
+                 Como se observa en el apartado Ejercicio No. 1, la distribución del estadístico t y el valor crítico muestran que nuestro valor de t se posiciona lejos de la zona de rechazo (p =0.05
+                α=0.05). Por lo tanto, no se rechaza la hipótesis nula. Es decir, el promedio de pago de una póliza es igual al promedio poblacional; no existen diferencias estadísticamente significativas. Esto se corroboró con el análisis del valor p, donde se obtuvo p > 0.05.
+                 """)
+        st.subheader("2️⃣ Ejercicio No. 2")
+        st.markdown(r"""
+                No conocemos la media ni la desviación estándar de la población. En este caso, utilizamos el estadístico t de Student para dos muestras independientes (mujeres vs. hombres).
+                Como se observa en el apartado Ejercicio No. 2, la distribución del estadístico t y el valor crítico muestran que nuestro valor de t se encuentra dentro de la zona de rechazo  α = 0.05. 
+                Por lo tanto, se rechaza la hipótesis nula y se acepta la hipótesis alternativa. Es decir, la diferencia en el IMC promedio de hombres es estadísticamente mayor que la de mujeres. 
+                Esto se corroboró con el análisis del valor p, donde se obtuvo  p < 0.05.
+                 """)
+        st.subheader("3️⃣ Ejercicio No. 3")
+        st.markdown(r"""
+                No conocemos la media ni la desviación estándar de la población, pero contamos con más de tres medias de diferentes grupos (0, 1 y 2 hijos). Por lo tanto, utilizamos un ANOVA de un factor.
+                Previo a la prueba, se aplicó Shapiro-Wilk en cada grupo, lo que evidenció que no cumplen normalidad. Además, se realizó una prueba de homocedasticidad (Bartlett) para evaluar la igualdad de varianzas entre grupos, obteniéndose p>0.05, lo que confirma homogeneidad de varianzas.
+                Como se observa en el apartado Ejercicio No. 3, la distribución del estadístico F y su valor crítico muestran que nuestro valor de F cae en la zona de rechazo (α=0.05). 
+                Por lo tanto, se rechaza la hipótesis nula y se acepta la hipótesis alternativa. Es decir, existen diferencias en la media del costo de la póliza en relación con el número de hijos. Esto se corroboró con el análisis del valor p (p<0.05).
+                > Nota: Será necesario realizar una prueba post hoc para determinar entre cuáles grupos existen dichas diferencias o si todos los grupos difieren entre sí en el promedio del costo de la póliza.
+                 """)
+        st.subheader("4️⃣ Ejercicio No. 4")
+        st.markdown(r"""
+                La población se modela con distribución binomial/multinomial. Dado que σ es desconocida y trabajamos con dos variables categóricas (género y cantidad de hijos), se aplicó la prueba de Ji-Cuadrada de independencia (Pearson).
+                Como se observa en el apartado Ejercicio No. 4, el valor del estadístico χ2=0.210 χ2=0.210 se posiciona fuera de la zona de rechazo (α=0.0). Por lo tanto, no se rechaza la hipótesis nula. En otras palabras, las proporciones de hijos (0, 1 y 2) 
+                son iguales en hombres y mujeres; la probabilidad de tener cierta cantidad de hijos es independiente del género del contratante. Esto se corroboró con el valor p obtenido (p>0.05).
+                 """)
+        st.subheader("5️⃣ Ejercicio No. 5")
+        st.markdown(r"""
+                Población con distribución normal, sin conocer. Dado que la desviación estándar poblacional es desconocida y tenemos dos grupos (fumadores y no fumadores), se utilizó la prueba t de Student para dos muestras independientes, bilateral (dos colas).
+                Como se observa en el apartado Ejercicio No. 5, el valor del estadístico t (30.29) cae dentro de la zona de rechazo (α = 0.05). En consecuencia, se rechaza la hipótesis nula y se acepta la hipótesis alternativa. Es decir, existen diferencias 
+                significativas entre fumadores y no fumadores en el promedio de la variable analizada. Esto se corroboró con el análisis del valor p (p<0.05).
+                 """)
 
 main()
