@@ -188,11 +188,165 @@ def main():
                     - **Potencia de la prueba actualizada:** 0.551486
                     """)
     elif navegador == 'Ejercicio No. 3':
-        pass
+        st.subheader('📊 Ejercicio No. 3:')
+        st.markdown(r"""
+                    **Pregunta:** ¿El costo de la póliza incrementa de acuerdo al numero de hijo que tiene el contratante?
+
+                    #### 1) Definimos $H_0$ y $H_1$
+                    - $H_0$: Las medias del costo de la póliza en los grupos de contratantes con 0, 1 y 2 hijos son iguales $\mu_0 = \mu_1 = \mu_2$
+                    - $H_1$: no todas las medias en el costo de la póliza en los grupos de contratantes con 0, 1, 2 hijos son iguales"
+
+                    #### 2) Definimos población y estadístico:
+                    Población normal con sigma desconocido. Dado que sigma es desconocido y tenemos mas de tres grupos de un factor **ANOVA**.
+            
+                    #### 3) Definimos $\alpha$:
+                    $\alpha = 0.05$
+
+                    **Normal Distribution Calculator:** https://www.infrrr.com/distributions/normal-distributions
+
+                    #### 4) Definimos la potencia de la prueba $(1-\beta)$ y el tamaño de la muestra $(n)$:
+                    - 0.2: efecto "pequeño"  
+                    - 0.5: efecto "mediano"  
+                    - 0.8: efecto "grande"
+                    """)
+        st.subheader('Desarrollo:')
+        st.markdown(r"""
+                    #### **1) Estimando tamaño de muestra:**
+                    Tamaño mínimo de la muestra por cada grupo: 82.16
+                    
+                    > **Es decir que: Para cada grupo de hijos debemos recolectar  83 individuos. Esto si queremos tener una potencia de la prueba de 0.9, un tamaño del efecto de 0.4 y un nivel de significancia de 0.05**
+                    
+                    #### **2) Estimando medidas de tendencia central:**
+                    Media de los grupos(costo de la póliza)
+                    1) $\mu_0 = 12365.975602 costo de la póliza en el grupo con 0 hijos
+                    2) $\mu_1 = 12731.171832 costo de la póliza en el grupo con 1 hijos
+                    3) $\mu_2 = 15073.563734costo de la póliza en el grupo con 2 hijos
+
+                    Desviación estándar (costo de la póliza)
+                    1) $\sigma_0$ = 12023.29 costo de la póliza en el grupo con 0 hijos
+                    2) $\sigma_1$ = 11823.631451 costo de la póliza en el grupo con 1 hijos
+                    3) $\sigma_2$ = 12891.368347 costo de la póliza en el grupo con 2 hijos
+
+                    Vemos que la desviación estándar en cada grupo es sumamente grande respecto al promedio.
+                    > La idea es aplicar una prueba de ANOVA de un factor (numero de hijos) para determinar si hay diferencias entr eos grupos con número de hijos es diferente en términos del costo de la póliza
+                    
+                    #### **3) Verificamos normalidad de nuestros datos:**
+                    - > Grupo con 0 hijos, Shapiro test: 4.928874820117834e-25 Rechazamos H₀; los datos no son normales. (p < 0.05)
+                    - > Grupo con 1 hijo, Shapiro test: 8.852445660276679e-21 Rechazamos H₀; los datos no son normales. (p < 0.05)
+                    - > Grupo con 2 hijo, Shapiro test: 4.782895921601787e-17 Rechazamos H₀; los datos no son normales. (p < 0.05)
+                    """)
+        st.pyplot(show_fig5())
+        st.markdown("> **El QQ-plot y el histograma muestra una distribucion no normal de nuestros dato en los tres grupos analizados**")
+        st.markdown(r"""
+                    #### **4) Prueba de homocedasticiadad: Prueba de Barlett**
+                    Prueba de Bartlett para las agrupaciones:
+                    p = 0.3109 ✅ No se rechaza H₀ (p>=0.05): homocedasticidad
+                    """)
+        st.markdown(r"""
+                    #### **5) Gráficamos la distribución del estadistico F y valor crítico:**
+                    """)
+        st.pyplot(show_fig6())
+        st.markdown(">**El estadistico de F cae en la zona de rechazo, se rechaza la hipótesis nula y se acepta la hipotesis alternativa: Hay diferencias entre los tres grupos**")
+        st.markdown(r"""
+                    #### **6) Obtenemos el valor de p a partir del esatdistico de F de ANOVA de un factor:** """)
+        st.table(resultados)
     elif navegador == 'Ejercicio No. 4':
-        pass
+        st.subheader('📊 Ejercicio No. 4:')
+        st.markdown(r"""
+                    **Pregunta:** ¿Determinar si existe relación entre el género del contratante y la cantidad de hijos?
+
+                    #### 1) Definimos $H_0$ y $H_1$
+                        - $H_0$: 𝐿𝑎 𝑐𝑎𝑛𝑡𝑖𝑑𝑎𝑑 𝑑𝑒 ℎ𝑖𝑗𝑜𝑠 𝑒𝑠 𝒊𝒏𝒅𝒆𝒑𝒆𝒏𝒅𝒊𝒆𝒏𝒕𝒆 𝑑𝑒 𝑠𝑖 𝑒𝑙 𝑐𝑜𝑛𝑡𝑟𝑎𝑡𝑎𝑛𝑡𝑒 𝑒𝑠 𝑚𝑢𝑗𝑒𝑟 𝑢 ℎ𝑜𝑚𝑏𝑟𝑒
+                        - $H_1$: 𝐿𝑎 𝑐𝑎𝑛𝑡𝑖𝑑𝑎𝑑 𝑑𝑒 ℎ𝑖𝑗𝑜𝑠 𝒏𝒐 𝒆𝒔 𝒊𝒏𝒅𝒆𝒑𝒆𝒏𝒅𝒊𝒆𝒏𝒕𝒆 𝑑𝑒 𝑠𝑖 𝑒𝑙 𝑐𝑜𝑛𝑡𝑟𝑎𝑡𝑎𝑛𝑡𝑒 𝑒𝑠 𝑚𝑢𝑗𝑒𝑟 𝑢 ℎ𝑜𝑚𝑏𝑟𝑒
+
+                    #### 2) Definimos población y estadístico:
+                    Población con distribución binomial y multinomial. Dado que sigma es desconocido y tenemos dos grupos categoricos (Cantidad de hijos y género),  procedemos a realizar una prueba de Ji-Cuadrada de independencia
+            
+                    #### 3) Definimos $\alpha$:
+                    $\alpha = 0.05$
+
+                    **Normal Distribution Calculator:** https://www.infrrr.com/distributions/normal-distributions
+
+                    #### 4) Definimos la potencia de la prueba $(1-\beta)$ y el tamaño de la muestra $(n)$:
+                    - 0.2: efecto "pequeño"  
+                    - 0.5: efecto "mediano"  
+                    - 0.8: efecto "grande"
+                    """)
+        st.subheader('Desarrollo:')
+        st.markdown(r"""
+                    #### 1) Tabla de contingencia: Frecuencias esperadas""")
+        st.dataframe(expected)
+        st.markdown(r"""
+                    #### 2) Tabla de contingencia: Frecuencias esperadas""")
+        st.dataframe(observed)
+        st.markdown(r"""
+                    #### 3) Prueba χ² de independencia: distribución y zona de rechazo""")
+        st.pyplot(show_fig7())
+        st.markdown(">**El estadistico de Chi-Cuadrada NO cae en la zona de rechazo, por lo tanto no se rechaza la hipótesis nula: Es decir, las proporciones de hijos (0,1,2) son iguales en hombres y mujeres**")
+        st.markdown(">La probabilidad de tener 0, 1 o 2 hijos es la misma, sin importar si el contratante es hombre o mujer.**")
+
+        st.markdown(r"""
+                    #### 4) Estadídistica de Pearson: """)
+        st.dataframe(stats.loc[0, :])
     elif navegador == 'Extra: Ejercicio No. 5':
-        pass
+        st.subheader('📊 Extra: Ejercicio No. 5')
+        st.markdown(r"""
+                    **Pregunta:** ¿Existen cambios (relación) en el precio promedio del costo de la póliza si el contratante es fumador o no es fumador?
+
+                    #### 1) Definimos $H_0$ y $H_1$
+                    - $H_0$: el promedio de pago de una poliza es igual entre fumadores y no fumadores $\mu_nf$ = $\mu_f$
+                    - $H_1$: el promedio del pago de una poliza es diferente entre fumadores y no fumadores $\mu_nf$ ≠ $\mu_f$
+
+                    #### 2) Definimos población y estadístico:
+                    - ✅ Población con distribución normal 
+                    - ❌ Sigma poblaciónal conocida 
+                    - ✅ Estadistico de prueba: t-student para dos muestras independientes de dos colas (bilateral)
+
+                    #### 3) Definimos $\alpha$:
+                    $\alpha = 0.05$
+
+                    **Normal Distribution Calculator:** https://www.infrrr.com/distributions/normal-distributions
+
+                    #### 4) Definimos la potencia de la prueba $(1-\beta)$ y el tamaño de la muestra $(n)$:
+                    - 0.2: efecto "pequeño"  
+                    - 0.5: efecto "mediano"  
+                    - 0.8: efecto "grande"
+                    """)
+        st.subheader('Desarrollo:')
+        st.markdown(r"""
+                    #### **1) Estimando tamaño de muestra:**
+                    Tamaño sugerido de cada muestra (n1=n2): 208.59
+                    
+                    > **Es decir que: Para cada grupo de fumadores o no fumadores debemos recolectar  209 individuos. Esto si queremos tener una potencia de la prueba de 0.9, un tamaño del efecto de 0.4 y un nivel de significancia de 0.05**
+                    
+                    #### **2) Estimando medidas de tendencia central:**
+                    Medidas de los FUMADORES (costo de la póliza)
+                    $\mu_f = 32064.37 costo de la póliza en el grupo de fumadores
+                    $\sigma_f$ = 11581.73 costo de la póliza en el grupo de fumadores
+                    n = 231 individuos fumadores
+                    
+                    Medidas de los NO FUMADORES (costo de la póliza)
+                    $\mu_nf$ = 18195.97 costo de la póliza en el grupo con no fumadores
+                    $\sigma_nf$ = 6058.17 costo de la póliza en el grupo con no fumadores
+                    n = 907 individuos no fumadores
+
+                    Vemos que la desviación estándar en cada grupo es sumamente grande respecto al promedio.
+                    > La idea es aplicar una prueba de t-student para determinar si hay diferencias entre dos categorias del grupo fumadores(si/no) en términos del costo de la póliza
+                    
+                    #### **3) Verificamos normalidad de nuestros datos:**
+                    - > Grupo con fumadores, Shapiro test: 4.265071255617243e-08 Rechazamos H₀; los datos no son normales. (p < 0.05)
+                    - > Grupo con no fumadores, Shapiro test: 4.168302639723238e-27 Rechazamos H₀; los datos no son normales. (p < 0.05)
+                    """)
+        st.pyplot(show_fig8())
+        st.markdown("> **El QQ-plot y el histograma muestra una distribucion no normal de nuestros dato en los dos grupos analizados**")
+        st.markdown(r"""
+                    #### **5) Gráficamos la distribución del estadistico T y valor crítico:**
+                    """)
+        st.pyplot(show_fig9())
+        st.markdown(">**El estadistico de F cae en la zona de rechazo, se rechaza la hipótesis nula y se acepta la hipotesis alternativa: Hay diferencias entre los dos grupos de fumadores y no fumadores**")
+        st.markdown(r"""
+                    #### **6) Obtenemos el valor de p a partir del esatdistico de F de ANOVA de un factor:** """)
+        st.table(resultadost)
     else:
         pass
 
